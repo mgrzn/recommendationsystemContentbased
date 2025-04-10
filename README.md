@@ -37,9 +37,12 @@ Variabel-variabel pada dataset adalah sebagai berikut:
 - activities : daftar aktivitas yang sesuai untuk mood tersebut, dipisahkan oleh tanda |.
   
 EDA dilakukan dengan:
-- Melihat distribusi mood
-- Menelusuri aktivitas yang paling umum
-- Melihat jumlah aktivitas unik per mood
+- Melihat distribusi mood menggunakan pie chart
+  ![image](https://github.com/user-attachments/assets/db0e3485-b3ee-4dd1-8580-b705f0fc9d38)
+
+- melihat aktivitas yang paling umum berdasarkan frekuensi menggunakan bar chart
+  ![image](https://github.com/user-attachments/assets/7d9b1ffd-49ef-40e1-87b5-8a6aa47a6c04)
+
   
 ## Data Preparation
 Beberapa tahapan data preparation yang dilakukan:
