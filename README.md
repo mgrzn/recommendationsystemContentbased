@@ -43,6 +43,11 @@ EDA dilakukan dengan:
 - melihat aktivitas yang paling umum berdasarkan frekuensi menggunakan bar chart
   ![image](https://github.com/user-attachments/assets/7d9b1ffd-49ef-40e1-87b5-8a6aa47a6c04)
 
+insght yang didapatkan :  
+- Dataset memiliki berbagai mood seperti Amazing, Good, Normal, dll.
+- Terdapat ratusan kombinasi aktivitas unik.
+- Beberapa entri mengandung NaN, terutama pada kolom aktivitas
+
   
 ## Data Preparation
 Beberapa tahapan data preparation yang dilakukan:
@@ -50,6 +55,9 @@ Beberapa tahapan data preparation yang dilakukan:
 ### Menghapus Kolom Tidak Perlu:
 
 Menghapus kolom seperti date, weekday, sub_mood, dan lainnya.
+
+### Memfilter data
+Filter Data: Hanya aktivitas dengan mood positif yang digunakan untuk meningkatkan kualitas rekomendasi dan menghindari noise dari mood negatif.
 
 ### Membersihkan Nilai Kosong:
 
@@ -65,6 +73,7 @@ Tokenisasi custom berbasis regex untuk membagi aktivitas dengan akurat.
 
 Menggunakan TfidfVectorizer dengan tokenizer kustom untuk membuat representasi vektor dari aktivitas.
 
+Setelah dilakukan data preparation Total data berjumlah 799 telah siap untuk modeling dengan data aktivitas yang bersih dan representatif.
 
 ## Modeling
 Model utama yang digunakan adalah Content-Based Filtering dengan cosine similarity.
@@ -79,9 +88,25 @@ Model utama yang digunakan adalah Content-Based Filtering dengan cosine similari
 - Bergantung pada kualitas representasi teks.
 - Tidak dapat belajar dari perilaku pengguna lain.
 
-## Evaluation
-Evaluasi sistem dilakukan secara kualitatif karena tidak ada label eksplisit untuk relevansi. 
+## Berikut hasi dari Top N rekomendasi
+![image](https://github.com/user-attachments/assets/688afed1-5df1-42d2-8b60-bf74bddd823d)
 
-Namun, pendekatan evaluasi manual digunakan:
-- Cosine Similarity Score dari input terhadap entri lainnya.
-- Pengamatan manual terhadap hasil apakah relevan atau tidak.
+
+## Evaluation
+Untuk mengevaluasi sistem, digunakan metrik Precision@5, yang mengukur seberapa banyak aktivitas yang direkomendasikan muncul dalam aktivitas aktual pengguna.
+langkah evaluasi :
+ Setiap data aktivitas pengguna dibagi menjadi dua bagian: 70% sebagai **input aktivitas**, dan 30% sisanya sebagai **target aktivitas aktual**.
+- Sistem menghasilkan rekomendasi Top-15 berdasarkan input aktivitas.
+- Kemudian dihitung berapa dari 5 rekomendasi teratas (`Top-5`) yang terdapat dalam target.
+- ![image](https://github.com/user-attachments/assets/a31a0129-408e-4c41-9b6e-6352dd2ee7d8)
+
+
+Hasil 
+- Sistem mampu memberikan rekomendasi relevan berdasarkan aktivitas sebelumnya.
+- Rata-rata Precision@5 dari 3 contoh diatas >0, menunjukkan performa cukup baik dalam menyarankan aktivitas yang sesuai.
+- Untuk meningkatkan performa, dapat dilakukan penguatan pada representasi vektor dan filtering aktivitas yang jarang muncul.
+#### Apakah model menjawab semua problem & goal?
+Ya. Model telah:
+- berhasil memberikan rekomendasi yang secara personal relevan terhadap riwayat aktivitas pengguna.
+- Menyediakan rekomendasi yang sesuai konteks.
+- Menghasilkan daftar aktivitas yang direkomendasikan berdasarkan aktivitas lain yang relevan dengan mood pengguna
