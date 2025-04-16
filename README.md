@@ -19,6 +19,7 @@ Menjelaskan pernyataan masalah:
 
 Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
 - Menghasilkan daftar aktivitas yang direkomendasikan berdasarkan aktivitas lain yang relevan dengan mood pengguna.
+- Membangun sistem rekomendasi yang mampu memberikan saran aktivitas secara personal dengan mempertimbangkan variasi mood.
 
     ### Solution statements
     - Menggunakan Content-Based Filtering dengan representasi TF-IDF dan cosine similarity untuk merekomendasikan aktivitas yang memiliki kemiripan konten dengan mood pengguna.
@@ -35,6 +36,11 @@ Dataset diperoleh dari Kaggle. Dataset ini berisi data mood harian dan aktivitas
 Variabel-variabel pada dataset adalah sebagai berikut:
 - mood : suasana hati pengguna (contoh: good, normal).
 - activities : daftar aktivitas yang sesuai untuk mood tersebut, dipisahkan oleh tanda |.
+- full_date : Berisi tanggal lengkap dalam format tertentu (kemungkinan YYYY-MM-DD atau dengan format waktu juga).
+- date :Merupakan bagian tanggal dari full_date, kemungkinan tanpa waktu (misalnya hanya YYYY-MM-DD).
+- weekday : Menyatakan hari dalam seminggu (misalnya: Senin, Selasa, dst).
+- time : Menyatakan waktu spesifik dalam satu hari (misalnya: 08:30, 17:00, dll).
+- sub_mood : Mood spesifik atau subkategori dari mood utama. Contoh: “excited”, “anxious”, “relaxed”, dsb.
   
 EDA dilakukan dengan:
 - Melihat distribusi mood menggunakan pie chart
@@ -107,6 +113,5 @@ Hasil
 - Untuk meningkatkan performa, dapat dilakukan penguatan pada representasi vektor dan filtering aktivitas yang jarang muncul.
 #### Apakah model menjawab semua problem & goal?
 Ya. Model telah:
-- berhasil memberikan rekomendasi yang secara personal relevan terhadap riwayat aktivitas pengguna.
-- Menyediakan rekomendasi yang sesuai konteks.
-- Menghasilkan daftar aktivitas yang direkomendasikan berdasarkan aktivitas lain yang relevan dengan mood pengguna
+- Model telah mengimplementasikan pendekatan content-based filtering menggunakan cosine similarity untuk mengukur kesamaan antar aktivitas berdasarkan fitur yang relevan. Pendekatan ini memungkinkan sistem untuk merekomendasikan aktivitas yang mirip dengan preferensi pengguna sebelumnya, yang secara tidak langsung mencerminkan mood pengguna.
+- menggunakan representasi fitur aktivitas dan menghitung kesamaan antar aktivitas, model dapat memberikan rekomendasi yang lebih personal
